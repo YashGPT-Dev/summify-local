@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced Local Text Summarizer</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- FontAwesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <header>
+        <div class="logo">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <h1>Summify<span>Local</span></h1>
+        </div>
+        <button id="themeToggle" class="icon-btn" title="Toggle Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </header>
+
+      <main class="dashboard">
+        <!-- Left Panel: Input & Controls -->
+        <section class="panel input-section">
+          <div class="panel-header">
+            <h2><i class="fa-solid fa-file-lines"></i> Source Text</h2>
+            <span id="charCounter" class="badge">0 chars</span>
+          </div>
+
+          <textarea
+            id="inputText"
+            placeholder="Paste your article, essay, or long paragraph here..."
+          ></textarea>
+
+          <div class="config-container">
+            <div class="preset-group">
+              <label>Summary Length Preset:</label>
+              <div class="radio-tabs">
+                <input
+                  type="radio"
+                  id="presetShort"
+                  name="lengthPreset"
+                  value="short"
+                />
+                <label for="presetShort">Short</label>
+
+                <input
+                  type="radio"
+                  id="presetMedium"
+                  name="lengthPreset"
+                  value="medium"
+                  checked
+                />
+                <label for="presetMedium">Medium</label>
+
+                <input
+                  type="radio"
+                  id="presetDetailed"
+                  name="lengthPreset"
+                  value="detailed"
+                />
+                <label for="presetDetailed">Detailed</label>
+              </div>
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-label">
+                <label for="summaryLength">Target Sentences:</label>
+                <span id="lengthVal" class="bold">4</span>
+              </div>
+              <input
+                type="range"
+                id="summaryLength"
+                min="1"
+                max="15"
+                value="4"
+              />
+            </div>
+          </div>
+
+          <button id="summarizeBtn">
+            <span class="btn-text">Generate Summary</span>
+            <div class="spinner hidden"></div>
+          </button>
+        </section>
+
+        <!-- Right Panel: Outputs & Stats -->
+        <section class="panel output-section">
+          <!-- Reading Stats Grid -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <i class="fa-solid fa-calculator text-primary"></i>
+              <div>
+                <div class="stat-lbl">Reduction</div>
+                <div id="statCompression" class="stat-val">-</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <i class="fa-solid fa-arrow-right-arrows-left text-success"></i>
+              <div>
+                <div class="stat-lbl">Words (Src → Out)</div>
+                <div id="statWords" class="stat-val">-</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <i class="fa-solid fa-clock text-warning"></i>
+              <div>
+                <div class="stat-lbl">Read Time</div>
+                <div id="statTime" class="stat-val">-</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Summary Output Box -->
+          <div class="output-container">
+            <div class="panel-header">
+              <h2><i class="fa-solid fa-align-left"></i> Summary</h2>
+              <div class="actions-group hidden" id="actionButtons">
+                <button id="copyBtn" class="icon-btn" title="Copy to Clipboard">
+                  <i class="fa-solid fa-copy"></i>
+                </button>
+                <button id="downloadTxt" class="icon-btn" title="Download TXT">
+                  <i class="fa-solid fa-file-text"></i>
+                </button>
+                <button
+                  id="downloadMd"
+                  class="icon-btn"
+                  title="Download Markdown"
+                >
+                  <i class="fa-solid fa-file-code"></i>
+                </button>
+              </div>
+            </div>
+            <div id="outputText" class="placeholder-text">
+              Your summary will appear here after analysis...
+            </div>
+          </div>
+
+          <!-- Keywords Output -->
+          <div class="keywords-container">
+            <h3><i class="fa-solid fa-tags"></i> Top Keywords</h3>
+            <div id="keywordsList" class="tag-cloud">
+              <span class="placeholder-tag">No keywords extracted</span>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
