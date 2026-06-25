@@ -120,11 +120,6 @@ No installation required.
 
 ---
 
-## License
-
-MIT License
-
----
 
 ## Author
 
