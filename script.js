@@ -13,6 +13,7 @@ const actionButtons = document.getElementById("actionButtons");
 const statCompression = document.getElementById("statCompression");
 const statWords = document.getElementById("statWords");
 const statTime = document.getElementById("statTime");
+const statText = document.getElementById("statText");
 
 // Presets Config
 const presets = { short: 2, medium: 5, detailed: 9 };
@@ -310,6 +311,10 @@ function renderOutput(originalText, summaryText, keywords) {
   // 2. Metrics engine tracking
   const origWordCount = (originalText.match(/\b\w+\b/g) || []).length;
   const summWordCount = (summaryText.match(/\b\w+\b/g) || []).length;
+  const charCount = originalText.length;
+  const sentenceCount =
+    originalText.match(/[^.!?]+[.!?]*\s*/g)?.filter((s) => s.trim()).length ||
+    1;
 
   const compressionPercent = Math.max(
     0,
@@ -324,6 +329,7 @@ function renderOutput(originalText, summaryText, keywords) {
   statCompression.innerText = `${compressionPercent}%`;
   statWords.innerText = `${origWordCount} → ${summWordCount}`;
   statTime.innerText = `${originalTime}m → ${summaryTime}m`;
+  statText.innerText = `${charCount}C | ${origWordCount}W | ${sentenceCount}S`;
 
   // 3. Keyword parsing tags generation
   keywordsList.innerHTML = "";
